@@ -109,7 +109,7 @@ body {
 }
 .topbar-inner a { color: var(--muted); text-decoration: none; transition: color var(--transition); }
 .topbar-inner a:hover { color: var(--accent); }
-.topbar-locations { display: flex; gap: 16px; align-items: center; }
+.topbar-locations { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
 .topbar-locations span.dot { color: var(--accent); font-weight: 600; }
 .topbar-locations .city { font-weight: 500; color: var(--fg-soft); }
 .topbar-right { display: flex; gap: 16px; align-items: center; }
@@ -153,6 +153,13 @@ body {
   font-size: 18px; color: var(--accent); background: transparent;
   flex-shrink: 0;
 }
+.brand-meta {
+  font-size: 10px; letter-spacing: 0.14em; color: var(--muted);
+  border-left: 1px solid var(--border); padding-left: 12px; margin-left: 4px;
+}
+.brand-meta b {
+  display: block; color: var(--fg);
+}
 .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
 .mobile-drawer-cta { display: none; }
 .nav-links a {
@@ -195,6 +202,7 @@ section.alt { background: var(--surface); }
 .sec-label::after { content: ''; width: 32px; height: 1px; background: var(--accent); }
 .sec-tag {
   display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
   border-top: 1px solid var(--border);
   padding-top: 14px; margin-bottom: 36px;
   font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
@@ -969,6 +977,7 @@ footer {
   width: 44px; height: 44px; /* WCAG 44x44 target */
   position: relative; z-index: 200;
   padding: 10px 8px;
+  flex-shrink: 0;
 }
 .nav-toggle span {
   display: block; width: 28px; height: 2px;
@@ -1020,7 +1029,7 @@ footer {
   .hero-art { order: 2; }
   .hero-art .hero-img { max-width: 100%; margin: 0 auto; }
   .about-art .img-block { max-width: 100%; margin: 0 auto; }
-  .brand-meta { display: none; }
+  .brand-meta { display: none !important; }
 }
 @media (max-width: 780px) {
   .hero-showcase, .about-showcase { max-width: 100%; margin: 0 auto; }
@@ -1038,27 +1047,37 @@ footer {
   .instagram-buttons { flex-direction: column; }
   .instagram-buttons .btn { width: 100%; justify-content: center; }
 
-  .topbar { padding: 6px 0; font-size: 11.5px; }
-  .topbar-locations { font-size: 11px; gap: 8px; }
+  .topbar { padding: 6px 0; font-size: 11px; }
+  .topbar-street { display: none; }
+  .topbar-inner {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+  }
+  .topbar-locations { font-size: 10.5px; gap: 4px 8px; flex-wrap: wrap; justify-content: center; }
   .topbar-locations span.dot { display: none; }
+  .topbar-right { font-size: 11px; gap: 6px; justify-content: center; }
   .topbar-right .phone:nth-of-type(2) { display: none; }
-  .topbar-inner { justify-content: space-between; gap: 6px; }
+  .sec-tag { margin-bottom: 24px; font-size: 10px; letter-spacing: 0.08em; }
+  .sec-tag .tag-meta { font-size: 9.5px; letter-spacing: 0.04em; }
 
-  .hero { padding: 24px 0 48px; }
-  .hero-copy h1 { font-size: 32px; line-height: 1.18; }
-  .hero-copy .lead { font-size: 15px; margin-bottom: 24px; }
+  .hero { padding: 20px 0 40px; }
+  .hero-copy h1 { font-size: clamp(25px, 7.2vw, 34px); line-height: 1.15; overflow-wrap: break-word; word-break: normal; }
+  .hero-copy .lead { font-size: 14.5px; margin-bottom: 20px; }
   .hero-actions { flex-direction: column; gap: 10px; }
   .hero-actions .btn { width: 100%; justify-content: center; }
 
   .hero-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-top: 24px;
-    padding-top: 18px;
+    gap: 6px;
+    margin-top: 20px;
+    padding-top: 16px;
   }
-  .hero-stats .stat-num { font-size: 24px; }
-  .hero-stats .stat-lbl { font-size: 10.5px; line-height: 1.15; }
+  .hero-stats .stat-num { font-size: clamp(19px, 5.5vw, 24px); }
+  .hero-stats .stat-lbl { font-size: 9.5px; line-height: 1.15; letter-spacing: 0.02em; }
   .hero-stats .stat:last-child {
     grid-column: span 1;
   }
@@ -1100,7 +1119,7 @@ footer {
       <span class="dot">●</span>
       <span class="city">Ірпінь</span>
       <span>·</span>
-      <span class="city">Київ (Оболонська наб., 3)</span>
+      <span class="city">Київ<span class="topbar-street"> (Оболонська наб., 3)</span></span>
       <span>·</span>
       <span class="city">Словенія</span>
       <span>·</span>
@@ -1120,7 +1139,7 @@ footer {
     <a href="#top" class="brand">
       <span class="brand-mark">◈</span>
       <span>Крістіна Жалейко</span>
-      <span style="font-size:10px;letter-spacing:0.14em;color:var(--muted);border-left:1px solid var(--border);padding-left:12px;margin-left:4px;"><b style="display:block;color:var(--fg);">Подолог</b>Ірпінь · Київ · Словенія</span>
+      <span class="brand-meta"><b>Подолог</b>Ірпінь · Київ · Словенія</span>
     </a>
     <nav>
       <ul class="nav-links" id="navLinks">
