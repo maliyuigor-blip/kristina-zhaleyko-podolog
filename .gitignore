@@ -1,0 +1,8 @@
+.claude/
+.audit-key
+audit.jsonl
+outputs/
+Нова папка/
+uploads/
+*.pyc
+__pycache__/
